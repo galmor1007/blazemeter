@@ -1,13 +1,21 @@
 package dataObjects;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 
+@Entity
+@Table(name = "courses")
 public class Course {
 
+  @Id
+  @Column(name = "course_id")
   private long id;
+  @Column(name = "course_name")
   private String name;
+  @OneToMany
+  @JoinColumn(name = "student_id")
   private Collection<Student> students = new HashSet<>();
 
   public long getId() {
@@ -18,8 +26,16 @@ public class Course {
     return name;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public Collection<Student> getStudents() {
     return students;
+  }
+
+  public void setStudents(Collection<Student> students) {
+    this.students = students;
   }
 
   @Override

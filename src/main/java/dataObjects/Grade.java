@@ -1,14 +1,24 @@
 package dataObjects;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "grades")
 public class Grade {
 
+  @Column(name = "grade")
   private int grade;
+  @Id
+  @Embedded
   private GradeId id;
 
   public int getGrade() {
     return grade;
+  }
+
+  public void setGrade(int grade) {
+    this.grade = grade;
   }
 
   public GradeId getId() {

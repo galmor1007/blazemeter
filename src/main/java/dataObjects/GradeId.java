@@ -1,10 +1,15 @@
 package dataObjects;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
+@Embeddable
 public class GradeId {
 
+  @Column(name = "student_id")
   private long studentId;
+  @Column(name = "course_id")
   private long courseId;
 
   public GradeId() {
