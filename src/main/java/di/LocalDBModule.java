@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import db.DB;
 import db.LocalDB;
 
-public class DBModule extends AbstractModule {
+public class LocalDBModule extends AbstractModule {
 
   @Override
   protected void configure() {

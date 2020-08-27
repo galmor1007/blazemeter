@@ -13,7 +13,7 @@ public class GradeService {
   private final DB db = DependencyProvider.getInjector().getInstance(DB.class);
 
   public String createGrade(Grade grade) {
-    if (grade.getGrade() < 0) {
+    if (grade.getGrade() <= 0) {
       return GRADE_TOO_LOW;
     }
     if (grade.getGrade() > 100) {

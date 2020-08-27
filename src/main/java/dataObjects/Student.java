@@ -9,6 +9,16 @@ public class Student {
   private String lastName;
   private String email;
 
+  public Student() {
+  }
+
+  public Student(long id, String firstName, String lastName, String email) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+  }
+
   public long getId() {
     return id;
   }
@@ -36,5 +46,15 @@ public class Student {
   @Override
   public int hashCode() {
     return Objects.hash(id);
+  }
+
+  @Override
+  public String toString() {
+    return "Student{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            '}';
   }
 }

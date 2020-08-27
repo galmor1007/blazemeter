@@ -1,4 +1,4 @@
-import di.DBModule;
+import di.LocalDBModule;
 import di.DependencyProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
   public static void main(String[] args) {
-    DependencyProvider.init(new DBModule());
+    DependencyProvider.init(new LocalDBModule());
     SpringApplication.run(Application.class, args);
   }
 }
