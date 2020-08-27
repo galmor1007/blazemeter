@@ -44,13 +44,11 @@ public class GradeController {
       case DB.SUCCESS:
         return new ResponseEntity<>(HttpStatus.CREATED);
       case DB.GRADE_ID_EXISTS:
-      case DB.STUDENT_ID_DOES_NOT_EXIST:
-      case DB.COURSE_ID_DOES_NOT_EXIST:
       case GradeService.GRADE_TOO_LOW:
       case GradeService.GRADE_TOO_HIGH:
         return new ResponseEntity<>(s, HttpStatus.BAD_REQUEST);
-      case DB.GRADE_ID_DOES_NOT_EXIST:
-        return new ResponseEntity<>(s, HttpStatus.NOT_FOUND);
+      case DB.OBJECT_NOT_FOUND:
+        return new ResponseEntity<>("Grade not found", HttpStatus.NOT_FOUND);
       default:
         return new ResponseEntity<>("Unexpected Result: " + s, HttpStatus.INTERNAL_SERVER_ERROR);
     }

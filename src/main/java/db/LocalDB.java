@@ -31,7 +31,7 @@ public class LocalDB implements DB {
   @Override
   public synchronized String updateStudent(Student student) {
     if (!students.containsKey(student.getId())) {
-      return STUDENT_ID_DOES_NOT_EXIST;
+      return OBJECT_NOT_FOUND;
     }
     students.put(student.getId(), student);
     return SUCCESS;
@@ -40,7 +40,7 @@ public class LocalDB implements DB {
   @Override
   public synchronized String deleteStudent(long id) {
     if (!students.containsKey(id)) {
-      return STUDENT_ID_DOES_NOT_EXIST;
+      return OBJECT_NOT_FOUND;
     }
     grades.keySet().stream().filter(gradeId -> gradeId.getStudentId() == id).forEach(grades::remove);
     courses.values().forEach(course -> course.getStudents().removeAll(course.getStudents().stream().filter(student -> student.getId() == id).collect(Collectors.toSet())));
@@ -66,7 +66,7 @@ public class LocalDB implements DB {
   @Override
   public synchronized String updateCourse(Course course) {
     if (!courses.containsKey(course.getId())) {
-      return COURSE_ID_DOES_NOT_EXIST;
+      return OBJECT_NOT_FOUND;
     }
     Course preUpdate = courses.remove(course.getId());
     String updateResult = createCourse(course);
@@ -80,7 +80,7 @@ public class LocalDB implements DB {
   @Override
   public synchronized String deleteCourse(long id) {
     if (!courses.containsKey(id)) {
-      return COURSE_ID_DOES_NOT_EXIST;
+      return OBJECT_NOT_FOUND;
     }
     grades.keySet().stream().filter(gradeId -> gradeId.getCourseId() == id).forEach(grades::remove);
     courses.remove(id);
@@ -89,11 +89,8 @@ public class LocalDB implements DB {
 
   @Override
   public synchronized String createGrade(Grade grade) {
-    if (!students.containsKey(grade.getId().getStudentId())) {
-      return STUDENT_ID_DOES_NOT_EXIST;
-    }
-    if (!courses.containsKey(grade.getId().getCourseId())) {
-      return COURSE_ID_DOES_NOT_EXIST;
+    if (!students.containsKey(grade.getId().getStudentId()) || !courses.containsKey(grade.getId().getCourseId())) {
+      return OBJECT_NOT_FOUND;
     }
     return grades.putIfAbsent(grade.getId(), grade) == null ? SUCCESS : GRADE_ID_EXISTS;
   }
@@ -106,7 +103,7 @@ public class LocalDB implements DB {
   @Override
   public synchronized String updateGrade(Grade grade) {
     if (!grades.containsKey(grade.getId())) {
-      return GRADE_ID_DOES_NOT_EXIST;
+      return OBJECT_NOT_FOUND;
     }
     Grade preUpdate = grades.get(grade.getId());
     String updateResult = createGrade(grade);
@@ -119,7 +116,7 @@ public class LocalDB implements DB {
 
   @Override
   public synchronized String deleteGrade(GradeId id) {
-    return grades.remove(id) != null ? SUCCESS : GRADE_ID_DOES_NOT_EXIST;
+    return grades.remove(id) != null ? SUCCESS : OBJECT_NOT_FOUND;
   }
 
   @Override

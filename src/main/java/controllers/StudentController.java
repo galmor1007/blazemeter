@@ -53,8 +53,8 @@ public class StudentController {
       case DB.STUDENT_ID_EXISTS:
       case StudentService.BAD_STUDENT_ID:
         return new ResponseEntity<>(s, HttpStatus.BAD_REQUEST);
-      case DB.STUDENT_ID_DOES_NOT_EXIST:
-        return new ResponseEntity<>(s, HttpStatus.NOT_FOUND);
+      case DB.OBJECT_NOT_FOUND:
+        return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
       default:
         return new ResponseEntity<>("Unexpected Result: " + s, HttpStatus.INTERNAL_SERVER_ERROR);
     }

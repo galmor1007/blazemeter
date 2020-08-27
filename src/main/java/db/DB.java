@@ -9,12 +9,10 @@ public interface DB {
 
   String SUCCESS = "Success";
   String STUDENT_ID_EXISTS = "Student ID exists";
-  String STUDENT_ID_DOES_NOT_EXIST = "Student ID doesn't exist";
   String COURSE_CONTAINS_NON_EXISTING_STUDENTS = "Course contains non-existing students";
   String COURSE_ID_EXISTS = "Course ID exists";
-  String COURSE_ID_DOES_NOT_EXIST = "Course ID doesn't exist";
   String GRADE_ID_EXISTS = "This student already has a grade in this course";
-  String GRADE_ID_DOES_NOT_EXIST = "This student doesn;t have a grade in this course";
+  String OBJECT_NOT_FOUND = "Requested object not found";
 
   // CRUD
   String createStudent(Student student);

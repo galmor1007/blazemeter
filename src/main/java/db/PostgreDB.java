@@ -175,7 +175,7 @@ public class PostgreDB implements DB {
       tx.commit();
     } catch (ObjectNotFoundException e) {
       tx.rollback();
-      return STUDENT_ID_DOES_NOT_EXIST;
+      return OBJECT_NOT_FOUND;
     } catch (Exception e) {
       tx.rollback();
       throw  e;

@@ -47,8 +47,8 @@ public class CourseController {
       case DB.COURSE_ID_EXISTS:
       case CourseService.BAD_COURSE_ID:
         return new ResponseEntity<>(s, HttpStatus.BAD_REQUEST);
-      case DB.COURSE_ID_DOES_NOT_EXIST:
-        return new ResponseEntity<>(s, HttpStatus.NOT_FOUND);
+      case DB.OBJECT_NOT_FOUND:
+        return new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
       default:
         return new ResponseEntity<>("Unexpected Result: " + s, HttpStatus.INTERNAL_SERVER_ERROR);
     }
